@@ -15,6 +15,19 @@
 # IBAN Validator
 Validates an IBAN that is in the IBAN register at 3.1 below, as such any experimental IBAN's do not validate since we do not have those in the ibanRegisterInfo list which is used to verify the length of the IBAN.
 
+## How to use
+
+### As console / docker
+**Validate iban console**
+
+  go run ibanValidator/ibanValidator.go GB82WEST12345698765432
+
+**Validate iban docker**
+first build the docker image and then run
+
+  make build
+  docker run ibanvalidator GB82WEST12345698765432
+
 
 ## Tasks: 
 
