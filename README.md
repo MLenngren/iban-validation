@@ -15,6 +15,15 @@
 # IBAN Validator
 Validates an IBAN that is in the IBAN register at 3.1 below, as such any experimental IBAN's do not validate since we do not have those in the ibanRegisterInfo list which is used to verify the length of the IBAN.
 
+The console/docker will return "validated" or "not validated" depending on if the IBAN has been validated
+
+The service will return the IBAN requested and the "validated" set to 0 or 1
+
+  {
+    "iban": "BE71096123456769",
+    "validated": 1
+  }
+
 ## How to use
 
 ### As console / docker
@@ -27,6 +36,18 @@ first build the docker image and then run
 
   make build
   docker run ibanvalidator GB82WEST12345698765432
+
+### As service
+**Start service**
+
+  go run ibanService/ibanService.go
+
+**Send a POST request to the local service**
+By default the service is listeningen on port 5000
+Example how to access the endpoint via curl:
+
+  curl --location --request POST 'localhost:5000/validate' --header 'Content-Type: application/json' --data-raw '{    "Iban": "GB82 WEST 1234 5698 7654 32"}'
+
 
 
 ## Tasks: 
