@@ -22,6 +22,18 @@ func TestValidateIban(t *testing.T) {
 
 	validatedResult = validator.ValidateIban("NI92BAMC000000000000000003123123")
 	assert.Equal(t, 1, validatedResult)
+
+	t.Run("Test to supply IBAN with spaces", func(t *testing.T) {
+		validatedResult = validator.ValidateIban("GB82 WEST 1234569 8765432")
+		assert.Equal(t, 1, validatedResult)
+
+		validatedResult = validator.ValidateIban(" NI 92BA MC00 00000000 0000000312 3123 ")
+		assert.Equal(t, 1, validatedResult)
+
+		validatedResult = validator.ValidateIban(" NI 92BA MC00 00010000 0000000312 3123 ")
+		assert.Equal(t, 0, validatedResult)
+	})
+
 }
 
 func TestRotateFirst4Chars(t *testing.T) {

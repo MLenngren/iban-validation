@@ -5,15 +5,29 @@ import (
 	"log"
 	"strconv"
 	s "strings"
+	"unicode"
 )
 
 // argument iban is required to be an ASCII string
 func ValidateIban(iban string) int {
-
+	// Remove spaces
+	iban = SpaceStringsBuilder(iban)
 	modifiedIban := RotateFirst4Chars(iban)
 	modifiedIban = CharacterToNumbers(modifiedIban)
 	return LargeMod97Calc(modifiedIban)
 
+}
+
+// Remove all the spaces in the string
+func SpaceStringsBuilder(str string) string {
+	var b s.Builder
+	b.Grow(len(str))
+	for _, ch := range str {
+		if !unicode.IsSpace(ch) {
+			b.WriteRune(ch)
+		}
+	}
+	return b.String()
 }
 
 // Calculate mod97 from a long number in string representation
