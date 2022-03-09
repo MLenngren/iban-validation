@@ -1,9 +1,9 @@
-package validator_test
+package ibanValidator_test
 
 import (
 	"testing"
 
-	validator "github.com/mlenngren/iban-validator"
+	validator "github.com/mlenngren/iban-validator/ibanValidator"
 	"github.com/stretchr/testify/assert"
 )
 
