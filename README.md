@@ -11,7 +11,6 @@
   </a>
 </div>
 
-<h1 align="center">Iban Validator</h1>
 
 # IBAN Validator
 Validates an IBAN that is in the IBAN register at 3.1 below, as such any experimental IBAN's do not validate since we do not have those in the ibanRegisterInfo list which is used to verify the length of the IBAN.
@@ -69,7 +68,9 @@ Searched on Swift, they had a txt file and a pdf file of IBAN registers. Downloa
 
 ### PONDERINGS
 
-- What is the correct microservice structure in go
+- What is some of the best microservice structures in go
+- How to log best practice
+- As above for errors, or we take it its the same sort of since go dont have exception handling like I am used ot.
 
 
 ### some commands
