@@ -26,12 +26,20 @@ The service will return the IBAN requested and the "validated" set to 0 or 1
 
 ## How to use
 
-### As console / docker
-**Validate iban console**
+### First make sure everything is ok by running tests
+
+This command will download and use the goLang 1.17 image
+
+    make test
+
+If everything passes, you are good to go.
+
+### Validate an IBAN number
+**Validate using your console**
 
     go run console/console.go GB82WEST12345698765432
 
-**Validate iban docker**
+**Validate using docker**
 
 Build the docker image and then Run it
 
@@ -39,7 +47,7 @@ Build the docker image and then Run it
     docker run ibanvalidator GB82WEST12345698765432
 
 ### As service
-**Start service**
+**Start service (defaults to port 5000)**
 
     go run ibanService/ibanService.go
 
