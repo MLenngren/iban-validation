@@ -1,4 +1,4 @@
-package main_test
+package ibanValidator_test
 
 import (
 	"testing"

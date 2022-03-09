@@ -12,8 +12,6 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o ./out/gobin ./ibanValidator/ibanValidator.go
-
-EXPOSE $PORT
+RUN go build -o ./out/gobin ./console/console.go
 
 ENTRYPOINT ["./out/gobin"]

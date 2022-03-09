@@ -1,32 +1,14 @@
-package main
+package ibanValidator
 
 import (
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	s "strings"
 	"unicode"
 
 	"github.com/mlenngren/iban-validator/ibanValidator/ibanRegisterInfo"
 )
-
-func main() {
-
-	if len(os.Args) == 1 {
-		log.Print("No arguments, you must supply IBAN")
-		os.Exit(1)
-	}
-
-	validated := ValidateIban(os.Args[1])
-	if validated == 1 {
-		println("validated")
-		os.Exit(0)
-	}
-
-	println("not validated")
-	os.Exit(0)
-}
 
 // argument iban is required to be an ASCII string
 func ValidateIban(iban string) int {
