@@ -1,11 +1,8 @@
 <div align="center">
-  <img src="https://github.com/MLenngren/iban-validator/raw/master/ibaninfo.png" alt="Polka" width="400" />
+  <img src="https://raw.githubusercontent.com/MLenngren/iban-validator/main/ibaninfo.jpg" alt="Iban info" width="400" />
 </div>
 
 <div align="center">
-  <a href="#">
-    <img src="https://forthebadge.com/images/badges/made-with-go.svg" alt="made with golang" />
-  </a>
   <a href="https://twitter.com/golang">
     <img src="https://badgen.net/twitter/follow/golang" alt="go golang twitter" />
   </a>
