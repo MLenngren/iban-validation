@@ -2,6 +2,8 @@ package ibanValidator
 
 import (
 	"fmt"
+	"log"
+	"strconv"
 	s "strings"
 )
 
@@ -10,7 +12,8 @@ func ValidateIban(iban string) int {
 
 	modifiedIban := RotateFirst4Chars(iban)
 	modifiedIban = CharacterToNumbers(modifiedIban)
-	return -2
+	return LargeMod97Calc(modifiedIban)
+
 }
 
 // Calculate mod97 from a long number in string representation
@@ -23,6 +26,65 @@ This process is continued till the last value of qmod97 is obtained.
 If it is 1 then that validates the number .
 */
 func LargeMod97Calc(ibanNumbersInString string) int {
+
+	// Some IBANS are really large, we can't handle it so we have to do it in chunks
+	tempNumberString := ""
+	step := 0
+	lastMod97 := 0
+	for _, ch := range ibanNumbersInString {
+
+		// first step is using the first 9 numbers
+		if step == 0 {
+			tempNumberString += string(ch)
+			if len(tempNumberString) == 9 {
+				intNumber, err := strconv.Atoi(tempNumberString) // convert the string to an integer so we can do the mod97
+				if err != nil {
+					log.Printf("error: %v", err.Error())
+					return 0
+				}
+
+				lastMod97 = intNumber % 97
+
+				tempNumberString = "" // Clear the number string, we have used it
+				step = 1              // finished with first 9
+
+			}
+		} else {
+			// subsequent steps uses the next 7 numbers and prefixes that with the mod97 number
+			tempNumberString += string(ch)
+			if len(tempNumberString) == 7 {
+				mod97String := fmt.Sprint(lastMod97)              // Need the number as a string
+				tempNumberString = mod97String + tempNumberString // prefix with mod97
+				intNumber, err := strconv.Atoi(tempNumberString)  // convert the string to an integer so we can do the mod97
+				if err != nil {
+					log.Printf("error: %v", err.Error())
+					return 0
+				}
+
+				lastMod97 = intNumber % 97
+				tempNumberString = "" // Clear the number string, we have used it
+
+			}
+		}
+	}
+
+	// When we dont have more characters to process, we still need to process the ones that are in the temp number string
+	if len(tempNumberString) > 0 {
+		mod97String := fmt.Sprint(lastMod97)
+		tempNumberString = mod97String + tempNumberString
+		intNumber, err := strconv.Atoi(tempNumberString)
+		if err != nil {
+			log.Printf("error: %v", err.Error())
+			return 0
+		}
+		lastMod97 = intNumber % 97
+	}
+
+	// if the last mod97 we made was 1, the IBAN is considered to be validated
+	if lastMod97 == 1 {
+		return 1
+	}
+
 	return 0
 }
 

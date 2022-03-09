@@ -66,6 +66,10 @@ Searched on Swift, they had a txt file and a pdf file of IBAN registers. Downloa
 - This is my first go
 
 
+### PONDERINGS
+
+- What is the correct microservice structure in go
+
 
 ### some commands
 

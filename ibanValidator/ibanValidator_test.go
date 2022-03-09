@@ -10,6 +10,18 @@ import (
 func TestValidateIban(t *testing.T) {
 	validatedResult := validator.ValidateIban("BE71096123456769")
 	assert.Equal(t, 1, validatedResult)
+
+	validatedResult = validator.ValidateIban("GB82WEST12345698765432")
+	assert.Equal(t, 1, validatedResult)
+
+	validatedResult = validator.ValidateIban("AL35202111090000000001234567")
+	assert.Equal(t, 1, validatedResult)
+
+	validatedResult = validator.ValidateIban("MU43BOMM0101123456789101000MUR")
+	assert.Equal(t, 1, validatedResult)
+
+	validatedResult = validator.ValidateIban("NI92BAMC000000000000000003123123")
+	assert.Equal(t, 1, validatedResult)
 }
 
 func TestRotateFirst4Chars(t *testing.T) {
