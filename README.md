@@ -29,7 +29,7 @@ The service will return the IBAN requested and the "validated" set to 0 or 1
 ### As console / docker
 **Validate iban console**
 
-    go run ibanValidator/ibanValidator.go GB82WEST12345698765432
+    go run console/console.go GB82WEST12345698765432
 
 **Validate iban docker**
 
