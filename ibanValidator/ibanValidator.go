@@ -6,12 +6,21 @@ import (
 	"strconv"
 	s "strings"
 	"unicode"
+
+	"github.com/mlenngren/iban-validator/ibanValidator/ibanRegisterInfo"
 )
 
 // argument iban is required to be an ASCII string
 func ValidateIban(iban string) int {
-	// Remove spaces
-	iban = SpaceStringsBuilder(iban)
+
+	iban = SpaceStringsBuilder(iban) // Remove spaces
+
+	// Check length against country specified lengths
+	if GetIbanCountryLength(iban) != len(iban) {
+		log.Printf("IBAN not corrent length")
+		return 0
+	}
+
 	modifiedIban := RotateFirst4Chars(iban)
 	modifiedIban = CharacterToNumbers(modifiedIban)
 	return LargeMod97Calc(modifiedIban)
@@ -28,6 +37,17 @@ func SpaceStringsBuilder(str string) string {
 		}
 	}
 	return b.String()
+}
+
+// Get the correct iban length of the country this iban belongs to
+func GetIbanCountryLength(iban string) int {
+	return ibanRegisterInfo.GetIbanLengthForCountryCode(GetCountryCode(iban))
+}
+
+// first 2 characters of IBAN is the country code
+func GetCountryCode(iban string) string {
+	ibanCountry := substr(iban, 0, 2)
+	return ibanCountry
 }
 
 // Calculate mod97 from a long number in string representation
