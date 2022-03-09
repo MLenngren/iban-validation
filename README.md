@@ -64,3 +64,9 @@ Searched on Swift, they had a txt file and a pdf file of IBAN registers. Downloa
 ## NOTICE
 
 - This is my first go
+
+
+
+### some commands
+
+- go get github.com/stretchr/testify
