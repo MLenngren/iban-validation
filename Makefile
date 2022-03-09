@@ -12,8 +12,8 @@ runs: ## Running validation service on port 5000. To run the service in docker, 
 
 test: ## run tests from docker
 	@echo "\033[92mRunning tests\033[0m"
-	docker run --rm -v "$$PWD":/usr/src/myapp -w /usr/src/myapp  golang:1.17 go test ibanValidator/ibanValidator_test.go -v
-
+	docker run  -v "$$PWD":/usr/src/myapp -w /usr/src/myapp  golang:1.17 go test ibanValidator/ibanValidator_test.go -v
+	docker run --rm -v "$$PWD":/usr/src/myapp --env GIN_MODE=release -w /usr/src/myapp  golang:1.17 go test ibanService/ibanService_test.go -v
 .PHONY: test
 
 help: ## Help target
