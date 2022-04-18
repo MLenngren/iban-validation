@@ -99,11 +99,11 @@ resource "aws_instance" "dev_go" {
   }
 
   provisioner "local-exec" {
-      command = templatefile("${var.host_os}-ssh-config.tpl", {
+      command = var.isdevbox ? templatefile("${var.host_os}-ssh-config.tpl", {
           hostname = self.public_ip,
           user = "ubuntu",
           identityfile = "~/.ssh/mainawskey"
-      })
+      }) : ""
       interpreter = var.host_os == "linux" ? ["bash", "-c"] : ["powershell", "-Command"]
   }
 }
