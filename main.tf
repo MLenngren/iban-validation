@@ -78,8 +78,9 @@ resource "aws_security_group" "main_sg" {
 
 resource "aws_key_pair" "main_auth" {
   key_name   = "mainkey"
-  public_key = var.MAINAWSKEYPUB
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmNe9z84AIcGo6gl6aq6OhYLPTauniWfF2ZwEQxbAes male@Marcuss-MBP" 
 }
+
 
 resource "aws_instance" "dev_go" {
   instance_type          = "t3.micro"
