@@ -1,7 +1,13 @@
 build: ## build validator and validatorservice images
 	@echo "\033[93mBuilding docker container ibanvalidator \033[0m"
-	docker build -t ibanvalidator:latest -f Dockerfile.validator .
-	docker build -t ibanvalidatorservice:latest -f Dockerfile.service .
+	docker build -t pfcmale/ibanvalidator:latestlocal -f Dockerfile.validator . 
+	docker build -t pfcmale/ibanvalidatorservice:latestlocal -f Dockerfile.service .
+	docker push pfcmale/ibanvalidatorservice:latestlocal
+	docker push pfcmale/ibanvalidator:latestlocal
+	docker build --platform linux/amd64 -t pfcmale/ibanvalidator:latest -f Dockerfile.validator . 
+	docker build --platform linux/amd64 -t pfcmale/ibanvalidatorservice:latest -f Dockerfile.service .
+	docker push pfcmale/ibanvalidatorservice:latest
+	docker push pfcmale/ibanvalidator:latest
 	@echo "\033[92mBuild finished\033[0m"
 .PHONY: build
 
