@@ -78,7 +78,8 @@ resource "aws_security_group" "main_sg" {
 
 resource "aws_key_pair" "main_auth" {
   key_name   = "mainkey"
-  public_key = file("~/.ssh/mainawskey.pub")
+  #public_key = file("~/.ssh/mainawskey.pub")
+  public_key = var.MAINAWSKEYPUB
 }
 
 resource "aws_instance" "dev_go" {
