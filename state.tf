@@ -1,13 +1,17 @@
 terraform {
   backend "s3" {
-    bucket = "maletest-pfc-ibanvalidator"
+    bucket = "pfcdev-male-ibanvalidator"
     key    = "default-infrastructure"
     region = "eu-north-1"
+    profile = "pfcdev"
   }
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "maletest-pfc-ibanvalidator"
+  bucket = "pfcdev-male-ibanvalidator"
+  tags = {
+    Environment = "dev"
+  }
 }
 resource "aws_s3_bucket_acl" "example" {
   bucket = aws_s3_bucket.terraform_state.id
